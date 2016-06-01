@@ -13,11 +13,11 @@ namespace SwitchStrings
     {
         public static void Main()
         {
-            var test = new EntryPoint();
-            test.numberOfKeys = 1000;
-            test.Setup();
-            test.Test();
-            return;
+//            var test = new EntryPoint();
+//            test.numberOfKeys = 1000;
+//            test.Setup();
+//            test.Test();
+//            return;
             BenchmarkRunner.Run<EntryPoint>(
                 ManualConfig.Create(DefaultConfig.Instance)
                             .With(Job.LegacyJitX86)
@@ -38,6 +38,7 @@ namespace SwitchStrings
             Console.WriteLine(UnrolledBSWithFastHash());
         }
 
+        // Время работы этого метода нужно вычесть из каждого бенчмарка - это некий сетап, не являющийся частью алгоритма
         [Benchmark(Baseline = true)]
         public int Empty()
         {

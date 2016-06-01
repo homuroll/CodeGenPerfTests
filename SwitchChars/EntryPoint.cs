@@ -35,6 +35,7 @@ namespace SwitchChars
             Console.WriteLine(PerfectHashtable());
         }
 
+        // Время работы этого метода нужно вычесть из каждого бенчмарка - это некий сетап, не являющийся частью алгоритма
         [Benchmark(Baseline = true)]
         public int Empty()
         {
