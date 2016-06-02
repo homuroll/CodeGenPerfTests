@@ -17,7 +17,7 @@ namespace Linq
             for(int i = 0; i < 1000000; ++i)
                 list.Add(new TestData {X = i});
             linq = x => x.Aggregate(0, (s, o) => s + o.X);
-            cyclesSharp = x =>
+            loopsSharp = x =>
                 {
                     int res = 0;
                     for(int i = 0; i < x.Count; i++)
@@ -25,31 +25,31 @@ namespace Linq
                     return res;
                 };
             Expression<Func<List<TestData>, int>> exp = x => x.Aggregate(0, (s, o) => s + o.X);
-            cyclesExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
+            loopsExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
         }
 
         [Benchmark(Baseline = true)]
-        public int Run_CyclesSharp()
+        public int LoopsSharp()
         {
-            return cyclesSharp(list);
+            return loopsSharp(list);
         }
 
         [Benchmark]
-        public int Run_CyclesExpression()
+        public int LoopsExpression()
         {
-            return cyclesExpression(list);
+            return loopsExpression(list);
         }
 
         [Benchmark]
-        public int Run_Linq()
+        public int Linq()
         {
             return linq(list);
         }
 
         private readonly List<TestData> list;
         private readonly Func<List<TestData>, int> linq;
-        private readonly Func<List<TestData>, int> cyclesSharp;
-        private readonly Func<List<TestData>, int> cyclesExpression;
+        private readonly Func<List<TestData>, int> loopsSharp;
+        private readonly Func<List<TestData>, int> loopsExpression;
 
         private class TestData
         {

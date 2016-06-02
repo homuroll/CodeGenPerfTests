@@ -1,32 +1,14 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Running;
-
 using GrobExp.Compiler;
 
 namespace Linq
 {
-    public class EntryPoint
-    {
-        public static void Main(string[] args)
-        {
-            new Test3().Run_CyclesExpression();
-            BenchmarkRunner.Run<Test3>(
-                ManualConfig.Create(DefaultConfig.Instance)
-                            .With(Job.LegacyJitX86)
-                            .With(Job.LegacyJitX64)
-                            .With(Job.RyuJitX64)
-                            .With(Job.Mono));
-        }
-    }
-
     public static class ExpressionExtensions
     {
         public static bool IsLinkOfChain(this Expression node, bool rootOnlyParameter, bool hard)
@@ -140,22 +122,5 @@ namespace Linq
         {
             return Expression.Lambda<TDelegate>(new LinqEliminator().Eliminate(expression.Body), expression.Parameters);
         }
-    }
-
-    public class ParameterReplacer : ExpressionVisitor
-    {
-        public ParameterReplacer(ParameterExpression from, ParameterExpression to)
-        {
-            this.to = to;
-            this.from = from;
-        }
-
-        protected override Expression VisitParameter(ParameterExpression node)
-        {
-            return node == from ? to : base.VisitParameter(node);
-        }
-
-        private readonly ParameterExpression to;
-        private readonly ParameterExpression from;
     }
 }

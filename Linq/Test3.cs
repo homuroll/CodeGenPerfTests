@@ -64,7 +64,7 @@ namespace Linq
                          where details.UsageCodeQualifier == "2"
                                && details.TypeCodeQualifier == "4"
                          select details.IdentificationCode).FirstOrDefault();
-            cyclesSharp = x =>
+            loopsSharp = x =>
                 {
                     string res = null;
                     for(int i = 0; i < x.Count; i++)
@@ -93,31 +93,31 @@ namespace Linq
                                                                 where details.UsageCodeQualifier == "2"
                                                                       && details.TypeCodeQualifier == "4"
                                                                 select details.IdentificationCode).FirstOrDefault();
-            cyclesExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
+            loopsExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
         }
 
         [Benchmark(Baseline = true)]
-        public string Run_CyclesSharp()
+        public string LoopsSharp()
         {
-            return cyclesSharp(list);
+            return loopsSharp(list);
         }
 
         [Benchmark]
-        public string Run_CyclesExpression()
+        public string LoopsExpression()
         {
-            return cyclesExpression(list);
+            return loopsExpression(list);
         }
 
         [Benchmark]
-        public string Run_Linq()
+        public string Linq()
         {
             return linq(list);
         }
 
         private readonly List<Message> list;
         private readonly Func<List<Message>, string> linq;
-        private readonly Func<List<Message>, string> cyclesSharp;
-        private readonly Func<List<Message>, string> cyclesExpression;
+        private readonly Func<List<Message>, string> loopsSharp;
+        private readonly Func<List<Message>, string> loopsExpression;
 
         private class Message
         {

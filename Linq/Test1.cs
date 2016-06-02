@@ -18,7 +18,7 @@ namespace Linq
                 list.Add(i);
             linq = x => x.Count(z => z > 10000);
 
-            cyclesSharp = x =>
+            loopsSharp = x =>
                 {
                     int res = 0;
                     for(int i = 0; i < x.Count; i++)
@@ -31,30 +31,30 @@ namespace Linq
 
             Expression<Func<List<int>, int>> exp = x => x.Count(z => z > 10000);
 
-            cyclesExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
+            loopsExpression = LambdaCompiler.Compile(exp.EliminateLinq(), CompilerOptions.None);
         }
 
         [Benchmark(Baseline = true)]
-        public int Run_CyclesSharp()
+        public int LoopsSharp()
         {
-            return cyclesSharp(list);
+            return loopsSharp(list);
         }
 
         [Benchmark]
-        public int Run_CyclesExpression()
+        public int LoopsExpression()
         {
-            return cyclesExpression(list);
+            return loopsExpression(list);
         }
 
         [Benchmark]
-        public int Run_Linq()
+        public int Linq()
         {
             return linq(list);
         }
 
         private readonly List<int> list;
         private readonly Func<List<int>, int> linq;
-        private readonly Func<List<int>, int> cyclesSharp;
-        private readonly Func<List<int>, int> cyclesExpression;
+        private readonly Func<List<int>, int> loopsSharp;
+        private readonly Func<List<int>, int> loopsExpression;
     }
 }
