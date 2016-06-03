@@ -38,8 +38,8 @@
       <HintPath>..\packages\BenchmarkDotNet.0.9.6\lib\net45\BenchmarkDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Grobexp.Compiler, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GrobExp.Compiler.1.0.1\lib\net40\Grobexp.Compiler.dll</HintPath>
+    <Reference Include="Grobexp.Compiler, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GrobExp.Compiler.1.0.2\lib\net40\Grobexp.Compiler.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

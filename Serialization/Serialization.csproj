@@ -39,8 +39,8 @@
       <HintPath>..\packages\BenchmarkDotNet.0.9.6\lib\net45\BenchmarkDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GroBuf, Version=1.1.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GroBuf.1.1.7\lib\net40\GroBuf.dll</HintPath>
+    <Reference Include="GroBuf, Version=1.1.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GroBuf.1.1.8\lib\net40\GroBuf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
